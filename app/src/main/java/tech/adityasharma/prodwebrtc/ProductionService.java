@@ -9,6 +9,10 @@ import androidx.annotation.Nullable;
 
 public class ProductionService extends Service {
 
+    static {
+        System.loadLibrary("prodwebrtc");
+    }
+
     private final static String TAG = "ProductionService";
 
     @Override
@@ -23,6 +27,12 @@ public class ProductionService extends Service {
 
         return START_NOT_STICKY;
     }
+
+    // cpp
+    public native void nativeInit();
+
+
+
 
     @Nullable
     @Override
