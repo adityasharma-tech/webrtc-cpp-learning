@@ -29,10 +29,31 @@ add_library(${CMAKE_PROJECT_NAME} SHARED
     # List C/C++ source files with relative paths to this CMakeLists.txt.
     prodwebrtc.cpp)
 
+
+message("PROJECT_SOURCE_DIR = ${PROJECT_SOURCE_DIR}")
+message("CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
+
+include_directories(
+        ${CMAKE_SOURCE_DIR}/webrtc/include
+)
+
+add_library(
+        webrtc-prebuilt
+        SHARED
+        IMPORTED
+)
+
+set_target_properties(
+        webrtc-prebuilt
+        PROPERTIES IMPORTED_LOCATION
+        ${CMAKE_SOURCE_DIR}/../jniLibs/${CMAKE_ANDROID_ARCH_ABI}/libjingle_peerconnection_so.so
+)
+
 # Specifies libraries CMake should link to your target library. You
 # can link libraries from various origins, such as libraries defined in this
 # build script, prebuilt third-party libraries, or Android system libraries.
 target_link_libraries(${CMAKE_PROJECT_NAME}
     # List libraries link to the target library
+    webrtc-prebuilt
     android
     log)
