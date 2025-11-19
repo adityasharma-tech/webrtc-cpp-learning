@@ -31,9 +31,6 @@ public class ProductionService extends Service {
     // cpp
     public native void nativeInit();
 
-
-
-
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
